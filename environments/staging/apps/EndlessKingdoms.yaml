@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Application
+metadata:
+  name: endless-kingdoms
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: EndlessKingdoms
+    targetRevision: HEAD
+    repoURL: https://github.com/gtovd/EndlessKingdomsInfra.git
+    path: environments/staging/EndlessKingdoms
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=false
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+
+
+
+
+
+
